@@ -6,5 +6,9 @@
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
         "@semantic-release/github"
-    ]
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lurtz/conventional_commits_test.git"
+    }
 }
