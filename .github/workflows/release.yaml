@@ -47,6 +47,8 @@ jobs:
       # details at https://semantic-release.gitbook.io/semantic-release/usage/installation#global-installation
       - run: ls -lha
       - run: ls -lha .git
+      - run: git status
+      - run: git branch
       - run: git config set remote.origin.url https://github.com/${{ github.repository }}.git
       - run: git config --global --add safe.directory $PWD
       - run: npx semantic-release@25.0.1 --debug
