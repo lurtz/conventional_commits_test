@@ -36,7 +36,6 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-          set-safe-directory: true
       # - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
       #   with:
       #     cache: npm
@@ -46,12 +45,10 @@ jobs:
       # - run: corepack npm audit signatures
       # pinned version updated automatically by Renovate.
       # details at https://semantic-release.gitbook.io/semantic-release/usage/installation#global-installation
-      - run: ls -lha
-      - run: ls -lha .git
-      # - run: git config --global --add safe.directory $PWD
-      - run: git status
-      - run: git branch
-      - run: git config set remote.origin.url https://github.com/${{ github.repository }}.git
+      - run: git config --global --add safe.directory $PWD
+      # - run: git status
+      # - run: git branch
+      # - run: git config set remote.origin.url https://github.com/${{ github.repository }}.git
       - run: npx semantic-release@25.0.1 --debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
