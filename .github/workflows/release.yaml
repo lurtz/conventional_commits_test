@@ -33,10 +33,10 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
-        with:
-          cache: npm
-          node-version: lts/*
+      # - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+      #   with:
+      #     cache: npm
+      #     node-version: lts/*
       # - run: npm clean-install
       # - run: npm install --global corepack@latest
       # - run: corepack npm audit signatures
