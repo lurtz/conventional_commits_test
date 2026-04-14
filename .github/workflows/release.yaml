@@ -46,6 +46,7 @@ jobs:
       # pinned version updated automatically by Renovate.
       # details at https://semantic-release.gitbook.io/semantic-release/usage/installation#global-installation
       - run: ls -lha
-      - run: npx semantic-release@25.0.1
+      - run: ls -lha .git
+      - run: npx semantic-release@25.0.1 --debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
