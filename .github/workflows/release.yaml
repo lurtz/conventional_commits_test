@@ -28,6 +28,9 @@ jobs:
       # id-token: write # to enable use of OIDC for npm provenance
     name: release
     runs-on: ubuntu-latest
+    container:
+      # image: node:lts
+      image: mcr.microsoft.com/devcontainers/javascript-node:4-24
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
