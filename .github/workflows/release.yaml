@@ -45,6 +45,7 @@ jobs:
       # - run: corepack npm audit signatures
       # pinned version updated automatically by Renovate.
       # details at https://semantic-release.gitbook.io/semantic-release/usage/installation#global-installation
+      - run: ls -lha
       - run: npx semantic-release@25.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
