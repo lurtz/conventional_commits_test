@@ -27,6 +27,8 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
     name: release
     runs-on: ubuntu-latest
+    outputs:
+      tag_name: ${{ steps.run-semantic-release.outputs.tag_name }}
     container:
       image: mcr.microsoft.com/devcontainers/javascript-node:4-24
     steps:
@@ -38,6 +40,26 @@ jobs:
       - run: git config --global --add safe.directory $PWD
       # pinned version updated automatically by Dependabot.
       # details at https://semantic-release.gitbook.io/semantic-release/usage/installation#global-installation
-      - run: npx semantic-release@25.0.1
+      - id: run-semantic-release
+        run: |
+          set -eux pipefail
+          npx semantic-release@25.0.1 >> /tmp/semantic-release.log 2>&1 || (cat /tmp/semantic-release.log && exit 1)
+          cat /tmp/semantic-release.log
+          tag_name=$(grep "Created tag" /tmp/semantic-release.log | sed -E 's/.*Created tag (.*)/\1/')
+          echo "tag_name=$tag_name" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  publish:
+    needs: release
+    if: needs.release.outputs.tag_name != ''
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "workflow called"
+      - run: |
+          echo "triggered by event: ${{ github.event_name }}"
+      - run: |
+          echo "github object: ${{ toJson(github) }}"
+      - run: |
+          echo "tag name: ${{ needs.release.outputs.tag_name }}"
+ 
